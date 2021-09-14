@@ -3,10 +3,7 @@ import { SHA256, enc } from "crypto-js";
 
 import EventAPI from '../api/eventAPI';
 
-import UserData from "../types/UserData";
 import EventData from "../types/EventData";
-import CustomData from "../types/CustomData";
-import Content from "../types/Content";
 
 const eventAPI = new EventAPI();
 
