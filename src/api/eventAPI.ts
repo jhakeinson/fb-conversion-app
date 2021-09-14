@@ -2,8 +2,8 @@ import HttpClient from './httpClient';
 import EventData from '../types/EventData';
 
 export default class EventAPI extends HttpClient {
-    protected TOKEN = 'EAAChdZCN1YusBAC5EYj3ZBKxGS2RFB9Sf7kxHUlU2Cu8G7Jv1s9qob9gHix95rXpb61ufF6bwQZBiS78nmZBXdKDox76bW39CH6FHhcyXeCfyGrowdrZCPJebNf20XPCxrrKn5KA9BLVZBnv8Qn81o6dZA5Kx5tFX75bLIYyoBVO5g4L6gh6TZCSLe9ZAZAL40v98ZD';
-    protected PIXEL_ID = '255820799741519';
+    protected TOKEN = 'EAA8xL32uHU8BALXRozNgNqLLb5SrKkCI1RuFqRLMDVPiWwkZCNkbgCGSox03DDO65Ix0b3mafe1VLMEuxNrIWz3ZBR9nxrbrQUB6ww7F3AbOVglhD4ZAADjAI08xZAn3C2X2bhsXNpEvufo7IeX0hSnevinhKHG3HxR5074ZCnhrQe4fsNXnL';
+    protected PIXEL_ID = '191842526257962';
 
     protected path = `/${this.PIXEL_ID}/events?access_token=${this.TOKEN}`;
 

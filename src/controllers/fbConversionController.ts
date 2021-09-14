@@ -21,19 +21,22 @@ const user: UserData = {
 
 const event: EventData = {
     "event_name": "PageView",
-        "event_time": currentTime,
-        "user_data": user,
-        "action_source": "website"
+    "event_time": currentTime,
+    "user_data": user,
+    "action_source": "website"
 };
 
 const eventAPI = new EventAPI();
 
 const postPageView = async (req: Request, res: Response) => {
-    let data = {};
+    let evt:EventData = req.body;
     let status = 200;
+    let data = {};
+
+    console.log(evt);
 
     try {
-        const response = await eventAPI.postEvent(event);
+        const response = await eventAPI.postEvent(evt);
         data = response.data;
     } catch(err: any) {
         data = err.response.data;
@@ -43,7 +46,7 @@ const postPageView = async (req: Request, res: Response) => {
     return res.status(status).json(data);
 }
 
-const customEvent123 = async (req: Request, res: Response) => {
+const customEvent = async (req: Request, res: Response) => {
     const customData: CustomData = {
         content_name: 'Sample',
         content_category: 'Demo',
@@ -74,5 +77,5 @@ function hashString(str: string) {
 
 export {
     postPageView,
-    customEvent123
+    customEvent
 };
