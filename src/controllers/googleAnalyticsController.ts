@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 
-import SegmentPageView from '../types/SegmentPageView';
+import GAPageData from '../types/GAPageData';
 
 import Analytics, { PageData } from 'analytics';
 // import googleAnalytics from '@analytics/google-analytics';
@@ -11,7 +11,7 @@ const analytics = Analytics({
   app: 'awesome-app',
   plugins: [
     googleAnalytics({
-      trackingId: process.env.GA4_ID
+      trackingId: process.env.UA_ID
     })
   ]
 });
@@ -29,11 +29,19 @@ const postGAPageView = async (req: Request, res: Response) => {
         status: 200
     };
 
+    const pgData: GAPageData = req.body;
+
     try {
-        const pgData: PageData<string> = req.body;
-        console.log(pgData.);
-        await analytics.page(pgData);
-        // console.log(result);
+        console.log(pgData);
+        await analytics.page({
+            href: pgData.href,
+            path: pgData.href,
+            title: pgData.title,
+            search: pgData.search_string,
+            width: pgData.screen_width,
+            height: pgData.screen_height
+        });
+
         payload.message = 'PageData sent SUCCESS...';
     } catch (error) {
         // console.log(error);
@@ -41,8 +49,6 @@ const postGAPageView = async (req: Request, res: Response) => {
         payload.status = 400;
         payload.error = true;
     }
-
-    console.log(payload);
 
     return res
             .status(payload.status)
