@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 
 import GAPageData from '../types/GAPageData';
 import GAIdentifyData from '../types/GAIdentifyData';
+import GATrackData from '../types/GATrackData';
 
 import Analytics, { PageData } from 'analytics';
 // import googleAnalytics from '@analytics/google-analytics';
@@ -90,8 +91,39 @@ const postGAIdentify = async (req: Request, res: Response) => {
         .json(payload);
 }
 
-const postGATrack = (req: Request, res: Response) => {
+const postGATrack = async (req: Request, res: Response) => {
+    let payload: ResponsePayload = {
+        message: '',
+        error: false,
+        status: 200
+    };
 
+    console.log(req.body);
+
+    const trackData: GATrackData = req.body;
+
+    await analytics.track(trackData.event, {
+        category: trackData.category,
+        quantity: trackData.quantity,
+        price: trackData.price,
+        name: trackData.name,
+        sku: trackData.sku,
+        id: trackData.orderId,
+        currency: trackData.currency
+    })
+    .catch(error => {
+        payload.message = error;
+        payload.status = 400;
+        payload.error = true;
+    });
+
+    if(!payload.error) {
+        payload.message = "TrackData sent SUCCESS...";
+    }
+
+    return res
+        .status(payload.status)
+        .json(payload);
 }
 
 
