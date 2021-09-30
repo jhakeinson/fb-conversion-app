@@ -5,7 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import EventData from '../../../src/types/EventData';
-
+import GAIdentityData from '../../../src/types/GAIdentifyData';
+import GAPageData from '../../../src/types/GAPageData';
+import GATrackData from '../../../src/types/GATrackData';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class FbConversionService {
   constructor(private http: HttpClient) { }
 
   postPageView(evt: EventData) {
-    const url = this.baseUrl + '/page-view'
+    const url = this.baseUrl + '/fb/page-view'
 
     return this.http.post(
       url,
@@ -32,7 +34,52 @@ export class FbConversionService {
   }
 
   postCustomEvent(evt: EventData) {
-    const url = this.baseUrl + '/custom-event'
+    const url = this.baseUrl + '/fb/custom-event'
+
+    return this.http.post(
+      url,
+      evt,
+      {
+        observe: 'body',
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  postGAPageView(evt: GAPageData) {
+    const url = this.baseUrl + '/ga/page-view'
+
+    return this.http.post(
+      url,
+      evt,
+      {
+        observe: 'body',
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  postGAIdentify(evt: GAIdentityData) {
+    const url = this.baseUrl + '/ga/identify'
+
+    return this.http.post(
+      url,
+      evt,
+      {
+        observe: 'body',
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  postGATrack(evt: GATrackData) {
+    const url = this.baseUrl + '/ga/track'
 
     return this.http.post(
       url,
