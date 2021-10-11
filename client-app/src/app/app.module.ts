@@ -8,12 +8,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FbConversionComponent } from './components/fb-conversion/fb-conversion.component';
 import { GoogleAnalyticsComponent } from './components/google-analytics/google-analytics.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
+
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     FbConversionComponent,
-    GoogleAnalyticsComponent
+    GoogleAnalyticsComponent,
+    LoginFormComponent,
+    HomeComponent,
+    SignUpFormComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +29,9 @@ import { GoogleAnalyticsComponent } from './components/google-analytics/google-a
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

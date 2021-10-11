@@ -1,54 +1,55 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-4">
-      <form>
-        <div class="mb-3">
-          <label for="em" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="em" name="em" [(ngModel)]='userForm.em'>
+    <h2>FB Conversion</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <form>
+                <div class="mb-3">
+                    <label for="em" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="em" name="em" [(ngModel)]='userForm.em'>
+                </div>
+                <div class="mb-3">
+                    <label for="ph" class="form-label">Phone</label>
+                    <input type="number" class="form-control" name="ph" id="ph" [(ngModel)]='userForm.ph'>
+                </div>
+                <div class="mb-3">
+                    <label for="fn" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name="fn" id="fn" [(ngModel)]='userForm.fn'>
+                </div>
+                <div class="mb-3">
+                    <label for="ln" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="ln" id="ln" [(ngModel)]='userForm.ln'>
+                </div>
+                <div class="mb-3">
+                    <label for="res" class="form-label">Result</label>
+                    <textarea class="form-control" name="res" id="res" [(ngModel)]='resText'></textarea>
+                </div>
+                <button (click)="submitPageView()" class="btn btn-primary">PageView</button>
+                <button (click)="submitCustomEvent()" class="btn btn-primary">CustomEvent</button>
+            </form>
         </div>
-        <div class="mb-3">
-          <label for="ph" class="form-label">Phone</label>
-          <input type="number" class="form-control" name="ph" id="ph" [(ngModel)]='userForm.ph'>
+        <div class="col-sm-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Event</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let h of history'>
+                        <th>{{ h.date }}</th>
+                        <td>{{ h.time }}</td>
+                        <td>{{ h.event }}</td>
+                        <td>{{ h.status }}</td>
+                        <td>{{ h.fn }}</td>
+                        <td>{{ h.ln}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="mb-3">
-          <label for="fn" class="form-label">First Name</label>
-          <input type="text" class="form-control" name="fn" id="fn" [(ngModel)]='userForm.fn'>
-        </div>
-        <div class="mb-3">
-          <label for="ln" class="form-label">Last Name</label>
-          <input type="text" class="form-control" name="ln" id="ln" [(ngModel)]='userForm.ln'>
-        </div>
-        <div class="mb-3">
-          <label for="res" class="form-label">Result</label>
-          <textarea class="form-control" name="res" id="res" [(ngModel)]='resText'></textarea>
-        </div>
-        <button (click)="submitPageView()" class="btn btn-primary">PageView</button>
-        <button (click)="submitCustomEvent()" class="btn btn-primary">CustomEvent</button>
-      </form>
     </div>
-    <div class="col-sm-8">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Event</th>
-            <th scope="col">Status</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let h of history'>
-            <th>{{ h.date }}</th>
-            <td>{{ h.time }}</td>
-            <td>{{ h.event }}</td>
-            <td>{{ h.status }}</td>
-            <td>{{ h.fn }}</td>
-            <td>{{ h.ln}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
