@@ -4,6 +4,7 @@ dotenv.config();
 import express, {Application} from "express";
 import cors from 'cors';
 
+import dbConnect from './configs/db';
 import router from "./routers";
 
 
@@ -16,4 +17,5 @@ app.use('', router);
 
 app.listen(PORT, (): void => {
     console.log(`Server listening to port ${PORT}...`);
+    dbConnect();
 });
