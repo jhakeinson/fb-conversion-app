@@ -10,7 +10,7 @@ const userLogIn = async (req: Request, res: Response) => {
         const { email, password } = req.body;
 
         if (!(email && password)) {
-            res.status(400).send("All input is required");
+            return res.status(400).send("All input is required");
         }
         const user = await User.findOne({ email });
 
@@ -30,7 +30,7 @@ const userLogIn = async (req: Request, res: Response) => {
             user.save();
 
             // user
-            res.status(200).json({
+            return res.status(200).json({
                 first_name: user.first_name,
                 last_name: user.last_name,
                 email,
@@ -50,7 +50,7 @@ const userSignUp = async (req: Request, res: Response) => {
 
         // Validate user input
         if (!(email && password && first_name && last_name)) {
-            res.status(400).send("All input is required");
+            return res.status(400).send("All input is required");
         }
 
         // check if user already exist

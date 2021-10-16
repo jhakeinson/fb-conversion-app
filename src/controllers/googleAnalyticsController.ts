@@ -34,7 +34,7 @@ const postGAPageView = async (req: Request, res: Response) => {
     const pgData: GAPageData = req.body;
 
     try {
-        console.log(pgData);
+        console.log(req.user);
         await analytics.page({
             href: pgData.href,
             path: pgData.href,
@@ -64,7 +64,7 @@ const postGAIdentify = async (req: Request, res: Response) => {
         status: 200
     };
 
-    console.log(req.body);
+    console.log(req.user);
 
     const idData: GAIdentifyData = req.body;
 
@@ -98,7 +98,7 @@ const postGATrack = async (req: Request, res: Response) => {
         status: 200
     };
 
-    console.log(req.body);
+    console.log(req.user);
 
     const trackData: GATrackData = req.body;
 

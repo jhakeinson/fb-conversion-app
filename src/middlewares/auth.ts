@@ -1,26 +1,18 @@
-import * as jwt from "jsonwebtoken";
+import jwt from "express-jwt";
 import { Request, Response } from "express";
 
-const verifyToken = (req: Request, res: Response, next: Function) => {
-    const token =
-        req.body.token || req.query.token || req.headers["x-access-token"];
+const verifyToken = jwt({
+    secret: process.env.JWT_TOKEN_KEY || '',
+    algorithms: ['HS256']
+});
 
-    if (!token) {
-        return res.status(403).send("A token is required for authentication");
+const handleAuthError = function (err: Error, req: Request, res: Response, next: Function) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send('invalid token...');
     }
-
-    try {
-        const secret = process.env.JWT_TOKEN_KEY || '';
-        const decoded = jwt.verify(token, secret);
-        console.log(decoded);
-        req.body.user = decoded;
-    } catch (err) {
-        res.status(401).send("Invalid Token");
-    }
-
-    return next();
-};
+}
 
 export {
-    verifyToken
+    verifyToken,
+    handleAuthError
 }
